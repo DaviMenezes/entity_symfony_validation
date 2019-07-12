@@ -1,0 +1,22 @@
+{
+    "name": "dvi/entity_synfony_validation",
+    "description": "Entity validations",
+    "homepage": "https://github.com/DaviMenezes/entity_synfony_validation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davi Menezes",
+            "email": "davimenezes.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "dvi/support": "^1.4.56",
+        "symfony/validator": "^4.3",
+    	"symfony/translation": "^4.3"
+    },
+    "support": {
+        "issues": "https://github.com/DaviMenezes/entity_synfony_validation/issues",
+        "source": "https://github.com/DaviMenezes/entity_synfony_validation"
+    }
+} 
