@@ -1,7 +1,7 @@
 {
-    "name": "dvi/entity_synfony_validation",
+    "name": "dvi/entity_symfony_validation",
     "description": "Entity validations",
-    "homepage": "https://github.com/DaviMenezes/entity_synfony_validation",
+    "homepage": "https://github.com/DaviMenezes/entity_symfony_validation",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
     	"symfony/translation": "^4.3"
     },
     "support": {
-        "issues": "https://github.com/DaviMenezes/entity_synfony_validation/issues",
-        "source": "https://github.com/DaviMenezes/entity_synfony_validation"
+        "issues": "https://github.com/DaviMenezes/entity_symfony_validation/issues",
+        "source": "https://github.com/DaviMenezes/entity_symfony_validation"
     }
 } 
