@@ -2,7 +2,8 @@
 
 namespace App\Entity\Attribute;
 
-use App\Entity\Attribute\Type\Contract\AttributeInterface;
+use Dvi\Symfony\Validation\Attribute\Type\Contract\AttributeInterface;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 trait RunValidationTrait
@@ -15,6 +16,7 @@ trait RunValidationTrait
             if (!$validators) {
                 continue;
             }
+            /**@var Constraint $validator*/
             foreach ($validators as $validator) {
                 $metadata->addPropertyConstraint($attribute->name(), $validator);
             }
