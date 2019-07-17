@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Attribute\Type;
+namespace Dvi\Symfony\Validation\Attribute\Type;
 
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -14,16 +14,17 @@ trait AttributeWithLengthTrait
     public function min(int $min)
     {
         $this->length = $this->getLength($min);
-        $this->length->minMessage = $this->translator->trans('min_length');
+
+        $this->length->minMessage = $this->getMessage('min_length');
 
         return $this;
     }
 
     public function max(int $max)
     {
-        $this->length = $this->getLength(0, $max);
+        $this->length = $this->getLength(0);
         $this->length->max = $max;
-        $this->length->maxMessage = $this->translator->trans('max_length');
+        $this->length->maxMessage = $this->getMessage('max_length');
 
         return $this;
     }
