@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Entity\Attribute\Type;
+namespace Dvi\Symfony\Validation\Attribute\Type;
 
-use App\Entity\Attribute\Type\Contract\AttributeInterface;
-
-class Varchar extends AttributeBase implements AttributeInterface
+class Varchar extends AttributeBase
 {
     use AttributeWithLengthTrait;
 }
