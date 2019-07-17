@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Entity\Attribute\Type\FactoryTypesTrait;
-use App\Entity\Attribute\Type\Varchar;
-use App\Entity\Attribute\Type\Varchar\Hidden;
+use Dvi\Symfony\Validation\Attribute\Type\FactoryTypesTrait;
+use Dvi\Symfony\Validation\Attribute\Type\Varchar;
+use Dvi\Symfony\Validation\Attribute\Type\Varchar\Hidden;
 use Dvi\Support\Service\ReflectionHelpers;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -40,11 +41,34 @@ abstract class EntityBase
 
     abstract public static function run(ClassMetadata $metadata);
 
-    public function validate($entity)
+    public function validate()
     {
-        return Validation::createValidatorBuilder()
+        $violations = Validation::createValidatorBuilder()
             ->addMethodMapping('run')
             ->getValidator()
-            ->validate($entity);
+            ->validate($this);
+
+
+        $session = new Session();
+        http()->obj()->setSession($session);
+
+        $array = [];
+        foreach ($violations as $key => $violation) {
+            $entity_name = get_class($violation->getRoot());
+            $entity_name .= '.' . $violation->getPropertyPath();
+            $array[$entity_name] = $violation;
+
+            $session->getFlashBag()->add('validation_violation', [
+                'attribute' => $entity_name,
+                'violation' => $violation
+            ]);
+        }
+
+        return $array;
+    }
+
+    protected function addAttribute($attribute)
+    {
+        self::$attributes[] = $attribute;
     }
 }
