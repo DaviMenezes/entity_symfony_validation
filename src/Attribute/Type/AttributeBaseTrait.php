@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Entity\Attribute\Type;
+namespace Dvi\Symfony\Validation\Attribute\Type;
 
+use Dvi\Symfony\Validator\ReplaceMessage;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -11,14 +13,19 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 trait AttributeBaseTrait
 {
     /**
-     * @var bool
+     * @var string
      */
-    private $required;
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $label;
 
     /**@var Translator*/
     public $translator;
 
-    private $validators = [];
+    protected $validators = [];
 
     public function name(string $name = null)
     {
@@ -31,14 +38,27 @@ trait AttributeBaseTrait
 
     public function required()
     {
-        $this->validators[] = new NotBlank([
-            'message' => $this->translator->trans('not_blank'),
+        $notBlank = new NotBlank([
+            'message' => $this->getMessage('not_blank')
         ]);
+
+        $this->validators['not_blank'] = $notBlank;
         return $this;
     }
 
     public function validators()
     {
         return $this->validators;
+    }
+
+    protected function getMessage(string $str)
+    {
+        $message = $this->translator->trans($str);
+
+        $replacer = new ReplaceMessage($message);
+        $replacer->variable('attribute', $this->getLabel());
+        $message = $replacer->replace();
+
+        return $message;
     }
 }
