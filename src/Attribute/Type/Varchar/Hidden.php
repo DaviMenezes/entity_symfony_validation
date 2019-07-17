@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity\Attribute\Type\Varchar;
+namespace Dvi\Symfony\Validation\Attribute\Type\Varchar;
 
-use App\Entity\Attribute\Type\AttributeBase;
-use App\Entity\Attribute\Type\Contract\AttributeInterface;
+use Dvi\Symfony\Validation\Attribute\Type\AttributeBase;
+use Dvi\Symfony\Validation\Attribute\Type\Contract\AttributeInterface;
 
 class Hidden extends AttributeBase implements AttributeInterface
 {

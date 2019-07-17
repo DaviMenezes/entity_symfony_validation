@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Attribute\Type\Contract;
+namespace Dvi\Symfony\Validation\Attribute\Type\Contract;
 
 interface AttributeInterface
 {
