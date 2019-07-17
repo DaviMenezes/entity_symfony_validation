@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Entity\Attribute\Type;
+namespace Dvi\Symfony\Validation\Attribute\Type;
 
-use App\Entity\Attribute\Type\Varchar\Hidden;
+use Dvi\Symfony\Validation\Attribute\Type\Varchar\Hidden;
 
 trait FactoryTypesTrait
 {
-    public function varchar($name)
+    public function varchar($name, string $label = null)
     {
-        $attr = new Varchar($name, $this->translator);
-        self::$attributes[] = $attr;
+        $attr = new Varchar($name, $this->translator, $label);
+        $this->addAttribute($attr);
+
         return $attr;
     }
 
     public function hidden($name)
     {
         $attr = new Hidden($name, $this->translator);
-        self::$attributes[] = $attr;
+        $this->addAttribute($attr);
+
         return $attr;
     }
 }
