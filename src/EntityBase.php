@@ -48,7 +48,6 @@ abstract class EntityBase
             ->getValidator()
             ->validate($this);
 
-
         $session = new Session();
         http()->obj()->setSession($session);
 
@@ -70,5 +69,13 @@ abstract class EntityBase
     protected function addAttribute($attribute)
     {
         self::$attributes[] = $attribute;
+    }
+
+    public function loadWithPostData()
+    {
+        foreach (self::$attributes as $attribute) {
+            $name = $attribute->name();
+            $this->$name = http()->post($name);
+        }
     }
 }
