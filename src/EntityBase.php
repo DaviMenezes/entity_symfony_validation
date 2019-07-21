@@ -63,6 +63,10 @@ abstract class EntityBase
             ]);
         }
 
+        if (count($violations)) {
+            $session->getFlashBag()->add('form_data', $this);
+        }
+
         return $array;
     }
 
@@ -75,7 +79,7 @@ abstract class EntityBase
     {
         foreach (self::$attributes as $attribute) {
             $name = $attribute->name();
-            $this->$name = http()->post($name);
+            $this->$name = http()->body($name);
         }
     }
 }
